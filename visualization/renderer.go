@@ -2,6 +2,7 @@ package visualization
 
 import (
 	"image/color"
+	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -18,6 +19,7 @@ func (r *Renderer) Draw(screen *ebiten.Image) {
 	for _, p := range r.Engine.Particles {
 		vector.DrawFilledCircle(screen, float32(p.Position.X), float32(p.Position.Y), float32(p.Radius), rgbaToColor(p.Color), true)
 	}
+	log.Printf("FPS: %v, Objects: %v", ebiten.ActualFPS(), len(r.Engine.Particles))
 }
 
 // rgbaToColor преобразует RGBA в формат ebiten

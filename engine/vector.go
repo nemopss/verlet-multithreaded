@@ -1,6 +1,9 @@
 package engine
 
-import "math"
+import (
+	"math"
+	"math/rand/v2"
+)
 
 type Vec2 struct {
 	X, Y float64
@@ -32,4 +35,12 @@ func (v Vec2) Normalize() Vec2 {
 
 func (v Vec2) Distance(other Vec2) float64 {
 	return v.Sub(other).Length()
+}
+
+func RandomDirectionDown() Vec2 {
+	angle := math.Pi/4 + rand.Float64()*(math.Pi/2) // Угол в диапазоне [π/4, 3π/4]
+	return Vec2{
+		X: math.Cos(angle),
+		Y: math.Sin(angle),
+	}
 }
