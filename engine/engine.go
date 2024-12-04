@@ -20,7 +20,7 @@ func (e *Engine) AddParticle(p Particle) {
 	e.Particles = append(e.Particles, p)
 }
 
-func (e *Engine) Update(dt float64) {
+func (e *Engine) Update(dt, width, height float64) {
 	subDt := dt / float64(e.SubSteps)
 
 	var wg sync.WaitGroup
@@ -32,6 +32,8 @@ func (e *Engine) Update(dt float64) {
 				e.Particles[i].Acceleration = e.Gravity
 				e.Particles[i].UpdatePosition(subDt)
 			}
+			ResolveCollisions(e.Particles)
+			ResolveWallCollisions(e.Particles, width, height)
 		}()
 		wg.Wait()
 	}
