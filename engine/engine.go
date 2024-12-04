@@ -6,13 +6,15 @@ type Engine struct {
 	Particles []Particle
 	Gravity   Vec2
 	SubSteps  int
+	Grid      *Grid
 }
 
-func NewEngine(gravity Vec2, subSteps int) *Engine {
+func NewEngine(gravity Vec2, subSteps int, cellSize float64) *Engine {
 	return &Engine{
 		Particles: make([]Particle, 0),
 		Gravity:   gravity,
 		SubSteps:  subSteps,
+		Grid:      NewGrid(cellSize),
 	}
 }
 
@@ -32,7 +34,7 @@ func (e *Engine) Update(dt, width, height float64) {
 				e.Particles[i].Acceleration = e.Gravity
 				e.Particles[i].UpdatePosition(subDt)
 			}
-			ResolveCollisions(e.Particles)
+			ResolveCollisionsWithGrid(e.Particles, e.Grid)
 			ResolveWallCollisions(e.Particles, width, height)
 		}()
 		wg.Wait()

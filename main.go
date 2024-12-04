@@ -28,12 +28,12 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 }
 
 func main() {
-	e := engine.NewEngine(engine.Vec2{X: 0, Y: 1000}, 8)
+	e := engine.NewEngine(engine.Vec2{X: 0, Y: 1000}, 8, 30)
 	r := &visualization.Renderer{Engine: e}
 	inputHandler := &visualization.InputHandler{Engine: e}
 	game := &Game{Renderer: r, InputHandler: inputHandler}
 
-	ebiten.SetWindowSize(800, 600)
+	ebiten.SetWindowSize(1000, 1000)
 	ebiten.SetWindowTitle("Verlet Physics")
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)

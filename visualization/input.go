@@ -27,7 +27,7 @@ func (ih *InputHandler) HandleInput() {
 		ih.Engine.AddParticle(engine.Particle{
 			Position:     engine.Vec2{X: float64(x), Y: float64(y)},
 			PrevPosition: engine.Vec2{X: float64(x), Y: float64(y)}.Sub(engine.RandomDirectionDown().Mul(5)), // Начальное движение
-			Radius:       5 + rand.Float64()*3,                                                               // Радиус от 10 до 15
+			Radius:       6 + rand.Float64()*8,
 			Color:        color,
 		})
 	}

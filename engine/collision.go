@@ -8,6 +8,24 @@ func ResolveCollisions(parlicles []Particle) {
 	}
 }
 
+func ResolveCollisionsWithGrid(particles []Particle, grid *Grid) {
+	grid.Clear()
+
+	for i := range particles {
+		grid.Add(&particles[i])
+	}
+
+	for i := range particles {
+		p1 := &particles[i]
+		nearby := grid.GetNearby(p1)
+		for _, p2 := range nearby {
+			if p1 != p2 {
+				ResolveParticleCollision(p1, p2)
+			}
+		}
+	}
+}
+
 func ResolveParticleCollision(p1, p2 *Particle) {
 	delta := p2.Position.Sub(p1.Position)
 	dist := delta.Length()

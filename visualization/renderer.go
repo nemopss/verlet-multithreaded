@@ -22,7 +22,6 @@ func (r *Renderer) Draw(screen *ebiten.Image) {
 	log.Printf("FPS: %v, Objects: %v", ebiten.ActualFPS(), len(r.Engine.Particles))
 }
 
-// rgbaToColor преобразует RGBA в формат ebiten
 func rgbaToColor(colors [4]uint8) color.RGBA {
 
 	return color.RGBA{
