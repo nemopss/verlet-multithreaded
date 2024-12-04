@@ -13,6 +13,19 @@ type InputHandler struct {
 }
 
 func (ih *InputHandler) HandleInput() {
+	if ebiten.IsKeyPressed(ebiten.KeyQ) {
+		ih.Engine.Grid.CellSize += 1
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyE) && ih.Engine.Grid.CellSize > 1 {
+		ih.Engine.Grid.CellSize -= 1
+	}
+
+	if ebiten.IsKeyPressed(ebiten.KeyZ) {
+		ih.Engine.SubSteps += 1
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyX) && ih.Engine.SubSteps > 1 {
+		ih.Engine.SubSteps -= 1
+	}
 	if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
 		x, y := ebiten.CursorPosition()
 
@@ -27,7 +40,7 @@ func (ih *InputHandler) HandleInput() {
 		ih.Engine.AddParticle(engine.Particle{
 			Position:     engine.Vec2{X: float64(x), Y: float64(y)},
 			PrevPosition: engine.Vec2{X: float64(x), Y: float64(y)}.Sub(engine.RandomDirectionDown().Mul(5)), // Начальное движение
-			Radius:       6 + rand.Float64()*8,
+			Radius:       2 + rand.Float64()*3,
 			Color:        color,
 		})
 	}

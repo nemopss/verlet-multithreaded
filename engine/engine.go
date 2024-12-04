@@ -1,6 +1,6 @@
 package engine
 
-import "sync"
+//import "sync"
 
 type Engine struct {
 	Particles []Particle
@@ -25,18 +25,18 @@ func (e *Engine) AddParticle(p Particle) {
 func (e *Engine) Update(dt, width, height float64) {
 	subDt := dt / float64(e.SubSteps)
 
-	var wg sync.WaitGroup
+	//var wg sync.WaitGroup
 	for step := 0; step < e.SubSteps; step++ {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			for i := range e.Particles {
-				e.Particles[i].Acceleration = e.Gravity
-				e.Particles[i].UpdatePosition(subDt)
-			}
-			ResolveCollisionsWithGrid(e.Particles, e.Grid)
-			ResolveWallCollisions(e.Particles, width, height)
-		}()
-		wg.Wait()
+		//	wg.Add(1)
+		//	go func() {
+		//		defer wg.Done()
+		for i := range e.Particles {
+			e.Particles[i].Acceleration = e.Gravity
+			e.Particles[i].UpdatePosition(subDt)
+		}
+		ResolveCollisionsWithGrid(e.Particles, e.Grid)
+		ResolveWallCollisions(e.Particles, width, height)
+		//	}()
+		//	wg.Wait()
 	}
 }
